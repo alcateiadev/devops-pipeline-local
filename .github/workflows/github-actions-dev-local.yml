@@ -18,7 +18,9 @@ jobs:
         run: docker build -t aplicacao-pipeline-local:${{ github.sha }} .
 
       - name: Configurando arquivo deployment
-        run: yq eval '.spec.template.spec.containers[0].image = "'aplicacao-pipeline-local:${{ github.sha }}'"' deployment.yaml | cat > new.yaml && mv new.yaml deployment.yaml
+        run: |
+          yq eval '.spec.template.spec.containers[0].image = "'aplicacao-pipeline-local:${{ github.sha }}'"' deployment.yaml | cat > new.yaml && mv new.yaml deployment.yaml
+          cat deployment.yml
 
 #      - name: Atualizando cluster
  #       run:  kubectl apply -f deployment.yml

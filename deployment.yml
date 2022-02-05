@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: aplicacao-pipeline-local
+  name: aplicacao-pipeline-local
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aplicacao-pipeline-local
+  template:
+    metadata:
+      labels:
+        app: aplicacao-pipeline-local
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: aplicacao-pipeline-local
+          image: ""

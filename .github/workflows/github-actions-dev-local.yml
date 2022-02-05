@@ -19,7 +19,7 @@ jobs:
 
       - name: Configurando arquivo deployment
         run: |
-          yq eval '.spec.template.spec.containers[0].image = "'aplicacao-pipeline-local:${{ github.sha }}'"' deployment.yaml | cat > new.yaml && mv new.yaml deployment.yaml
+          yq eval '.spec.template.spec.containers[0].image = "'aplicacao-pipeline-local:${{ github.sha }}'"' deployment.yml | cat > new.yml && mv new.yml deployment.yml
           cat deployment.yml
 
 #      - name: Atualizando cluster

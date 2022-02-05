@@ -1,0 +1,24 @@
+name: Pipeline Local com Vagrant
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  setup-build-publis-deploy-local:
+    runs-on: self-hosted
+    environment: master
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Compilando imagem Docker
+        run: docker build -t aplicacao-pipeline-local:${{ github.sha }} .
+
+      - name: Configurando arquivo deployment
+        run: yq eval '.spec.template.spec.containers[0].image = "'aplicacao-pipeline-local:${{ github.sha }}'"' deployment.yaml | cat > new.yaml && mv new.yaml deployment.yaml
+
+#      - name: Atualizando cluster
+ #       run:  kubectl apply -f deployment.yml

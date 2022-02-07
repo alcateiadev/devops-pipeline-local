@@ -15,10 +15,10 @@ jobs:
           fetch-depth: 0
 
       - name: Compilando imagem Docker
-        run: docker build -t 192.168.100.128:5000/aplicacao-pipeline-local:${{ github.sha }} .
+        run: docker build -t registry.local:5000/aplicacao-pipeline-local:${{ github.sha }} .
 
       - name: Enviando imagem Docker
-        run: docker push 192.168.100.128:5000/aplicacao-pipeline-local:${{ github.sha }}
+        run: docker push registry.local:5000/aplicacao-pipeline-local:${{ github.sha }}
 
       - name: Configurando arquivo deployment
         run: |
